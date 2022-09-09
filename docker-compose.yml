@@ -1,0 +1,43 @@
+version: '3.4'
+
+services:
+  api:
+    container_name: anywhere-healing-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    entrypoint: .develop/dev.entrypoint.sh
+    depends_on:
+      - mysql
+      # - redis
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - .develop/dev.entrypoint.sh:/entrypoint.sh
+    ports:
+      - '3000:3000' # server port
+      - '9228:9228' # port for debugging tests
+      - '9229:9229' # port for debugging process
+  # redis:
+  #   container_name: mcc-redis
+  #   image: bitnami/redis
+  #   ports:
+  #     - 6379:6379
+  #   environment:
+  #     ALLOW_EMPTY_PASSWORD: 'yes'  
+
+  mysql:
+    container_name: anywhere-healing-app-mysql
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password --sql-mode=""
+    volumes:
+      - .develop/mysql:/docker-entrypoint-initdb.d:cached
+      # @todo issue when using persisted, named volumes not running above ^
+      # we used a named volume so that data persists between up'ing and down'ing
+      # - 1295-25-stellantis-mcc-api-temp-db-data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+# volumes:
+#   1295-25-stellantis-mcc-api-temp-db-data:
