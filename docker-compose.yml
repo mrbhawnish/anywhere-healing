@@ -13,6 +13,8 @@ services:
     volumes:
       - .:/app
       - /app/node_modules
+      - config
+      - models
       - .develop/dev.entrypoint.sh:/entrypoint.sh
     ports:
       - '3000:3000' # server port
