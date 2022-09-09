@@ -14,9 +14,7 @@
     "create-migration": "sequelize-cli migration:generate --name",
     "create-seed": "sequelize-cli seed:generate --name",
     "rollback-migration": "sequelize-cli db:migrate:undo",
-    "rollback-seed": "sequelize-cli db:seed:undo",
-    "build": "ng build",
-    "heroku-postbuild": "ng build --prod"
+    "rollback-seed": "sequelize-cli db:seed:undo"
   },
   "keywords": [],
   "author": "",
