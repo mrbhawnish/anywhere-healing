@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "node server.js",
     "local": "nodemon --inspect=0.0.0.0:9229 server.js",
@@ -11,7 +14,9 @@
     "create-migration": "sequelize-cli migration:generate --name",
     "create-seed": "sequelize-cli seed:generate --name",
     "rollback-migration": "sequelize-cli db:migrate:undo",
-    "rollback-seed": "sequelize-cli db:seed:undo"
+    "rollback-seed": "sequelize-cli db:seed:undo",
+    "build": "ng build",
+    "heroku-postbuild": "ng build --prod"
   },
   "keywords": [],
   "author": "",
